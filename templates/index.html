@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Doctor Appointments</title>
+</head>
+<body>
+    <h1>Online Doctor Appointments</h1>
+
+    <h2>Doctors</h2>
+    <ul>
+        {% for doctor in doctors %}
+            <li>{{ doctor }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Appointments</h2>
+    <ul>
+        {% for appointment in appointments %}
+            <li>
+                <strong>Doctor:</strong> {{ appointment.doctor }}<br>
+                <strong>Date:</strong> {{ appointment.date }}<br>
+                <strong>Time:</strong> {{ appointment.time }}<br>
+                <strong>Patient:</strong> {{ appointment.patient_name }}<br>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Schedule an Appointment</h2>
+    <form method="POST" action="/schedule">
+        <label for="doctor">Choose a doctor:</label>
+        <select name="doctor" required>
+            {% for doctor in doctors %}
+                <option value="{{ doctor }}">{{ doctor }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="date">Select a date:</label>
+        <input type="date" name="date" required><br>
+        <label for="time">Select a time:</label>
+        <input type="time" name="time" required><br>
+        <label for="patient_name">Your Name:</label>
+        <input type="text" name="patient_name" required><br>
+        <input type="submit" value="Schedule Appointment">
+    </form>
+</body>
+</html>
+
