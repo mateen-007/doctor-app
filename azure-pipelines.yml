@@ -26,12 +26,8 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
-          $(tag)
-    - task: Docker@2
-      displayName: 'Run Docker Container'
+          myapp:$(tag)
+    - task: CmdLine@2
       inputs:
-        command: 'run'
-        containerName: 'myapp-container'
-        imageName: 'python:$(tag)'
-        ports: '5000:5000'
+        script: 'docker run -p 5000:5000 myapp:$(tag)'
 
